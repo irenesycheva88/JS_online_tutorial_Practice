@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+	<script>
+		// Сортировка объектов
+		'use strict'
+		var vasya = { name: "Вася", age: 23 };
+		var masha = { name: "Маша", age: 18 };
+		var vovochka = { name: "Вовочка", age: 6 };
+
+		var people = [ vasya , masha , vovochka ];
+
+		alert( showPeopleNames(people) );
+
+		people.sort(comparePeopleByAge);
+
+		alert( showPeopleNames(people) );
+
+		function comparePeopleByAge(personA, personB)  {
+			return personA.age - personB.age;
+		}
+
+		function showPeopleNames(people) {
+			var peopleNames = '';
+
+			for(var i = 0; i < people.length; i++)  {
+				peopleNames += people[i].name;
+
+				if( i != people.length - 1 )
+					peopleNames += ', ';
+			}
+			return peopleNames;
+		}
+	</script>
+
+</body>
+</html>

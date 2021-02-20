@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+	<script>
+		// Относительное форматирование даты
+
+		'use strict';
+
+		// Моё решение (первоначально с недоработкой/ошибкой - делала без округления)
+		function formatDateTime(date) {
+
+			var yy = date.getFullYear() % 100;
+			if(yy < 10)
+				yy = '0' + yy;
+
+			var mm = date.getMonth() + 1;
+			if(mm < 10)
+				mm = '0' + mm;
+
+			var dd = date.getDate();
+			if(dd < 10)
+				dd = '0' + dd;
+
+			var hh = date.getHours();
+			if(hh < 10)
+				hh = '0' + hh;
+
+			var mins = date.getMinutes();
+			if(mins < 10)
+				mins = '0' + mins;
+
+			return dd + '.' + mm + '.' + yy + ' ' + hh + ':' + mins;
+		}
+
+		function formatDate(date) {
+
+			var diff = Date.now() - date;
+
+			if(diff < 1000) {
+				return "только что";
+			}
+
+			var sec = Math.floor(diff / 1000);
+			if(sec < 60) {
+				return sec + " сек. назад";
+			}
+
+			var min = Math.floor(diff / (60 * 1000));
+			if(min < 60)
+				return min + " мин. назад";
+
+			return formatDateTime(date);
+		}
+		
+		// Решение из учебника
+		function formatDate(date) {
+			var diff = new Date() - date; // разница в миллисекундах
+
+			if (diff < 1000) { // прошло менее 1 секунды
+				return 'только что';
+			}
+
+			var sec = Math.floor(diff / 1000); // округлить diff до секунд
+
+			if (sec < 60) {
+				return sec + ' сек. назад';
+			}
+
+			var min = Math.floor(diff / 60000); // округлить diff до минут
+			if (min < 60) {
+				return min + ' мин. назад';
+			}
+
+			// форматировать дату, с учетом того, что месяцы начинаются с 0
+			var d = date;
+			d = [
+				'0' + d.getDate(),
+				'0' + (d.getMonth() + 1),
+				'' + d.getFullYear(),
+				'0' + d.getHours(),
+				'0' + d.getMinutes()
+			];
+
+			for (var i = 0; i < d.length; i++) {
+				d[i] = d[i].slice(-2);
+			}
+
+			return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
+		}
+		
+		describe("formatDate", function() {
+			it("выводит дату 1мс назад как \"только что\"", function() {
+				assert.equal(formatDate(new Date(new Date() - 1)), 'только что');
+			});
+
+			it('выводит дату "30 сек назад"', function() {
+				assert.equal(formatDate(new Date(new Date - 30 * 1000 - 5)), "30 сек. назад");
+			});
+
+			it('выводит дату "5 мин назад"', function() {
+				assert.equal(formatDate(new Date(new Date - 5 * 60 * 1000)), "5 мин. назад");
+			});
+
+			it("выводит старую дату в формате дд.мм.гг чч:мм", function() {
+				assert.equal(formatDate(new Date(2014, 2, 1, 11, 22, 33)), "01.03.14 11:22");
+			});
+
+			it("выводит старую дату в формате дд.мм.гг чч:мм", function() {
+				assert.equal(formatDate(new Date(2014, 11, 15, 11, 22, 33)), "15.12.14 11:22");
+			});
+		});
+	</script>
+
+</body>
+</html>

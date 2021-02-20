@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Вывод чисел каждые 100 мс, через setTimeout
+
+		'use strict';
+
+		function printNumbersInterval() {
+		var i = 1;
+		var timerId = setTimeout(function printNumber() {
+
+			if(i <= 20) { 
+				console.log(i++);
+				setTimeout(printNumber, 100);
+			}
+		}, 100);
+	}
+
+	printNumbersInterval();
+	</script>
+</body>
+
+</html>

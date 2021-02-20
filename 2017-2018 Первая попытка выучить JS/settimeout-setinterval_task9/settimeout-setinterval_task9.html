@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+	<script src="test.js"></script>
+</head>
+<body>
+
+	<script>
+		// Тормозилка
+
+		/*
+		// Моё решение
+		// Очень отличается от решения из учебника, привиденные тесты прошло, но после 
+		// добавления новых тестов, не прошло
+		'use strict';
+
+		function throttle(f, ms) {
+			var timerId = "first";
+			var timeStart = 0;
+			var timeInterval = 0;
+
+			return function() {
+				var savedThis = this;
+				var savedArgs = arguments;
+				timeInterval = Date.now() - timeStart;
+				//console.log(timeInterval + " = " + Date.now() + " - " + timeStart);
+
+				if(timerId == "first") {
+
+					timeStart = Date.now();
+					f.apply(savedThis, savedArgs);
+					timerId = null;
+					timeInterval = 0;
+				}
+				else {
+
+					if(timerId) {
+						clearTimeout(timerId);
+					}
+
+					timerId = setTimeout(function() {
+					timeStart = Date.now();
+					f.apply(savedThis, savedArgs);
+					timerId = null;
+					timeInterval = 0;
+					}, ms - timeInterval);
+				}
+			}
+		}
+		*/
+		
+		// Решение из учебника
+		function throttle(func, ms) {
+
+			var isThrottled = false,
+			savedArgs,
+			savedThis;
+
+			function wrapper() {
+
+				if (isThrottled) {
+					savedArgs = arguments;
+					savedThis = this;
+					return;
+				}
+
+				func.apply(this, arguments);
+
+				isThrottled = true;
+
+				setTimeout(function() {
+					isThrottled = false;
+					if (savedArgs) {
+					wrapper.apply(savedThis, savedArgs);
+					savedArgs = savedThis = null;
+					}
+				}, ms);
+			}
+
+			return wrapper;
+		}
+
+	</script>
+
+</body>
+</html>

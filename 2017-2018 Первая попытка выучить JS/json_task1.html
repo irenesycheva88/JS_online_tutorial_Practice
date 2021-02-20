@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+	// Превратите объект в JSON
+
+	'use strict';
+
+	var leader = {
+		name: "Василий Иванович",
+		age: 35
+	};
+
+	var str = JSON.stringify(leader);
+	alert( str );
+
+	var leaderAfter = JSON.parse(str);
+	alert( leaderAfter.name );
+	alert( leaderAfter.age );
+	
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+  <script>
+	// Функция removeClass
+	'use strict'
+	// Моё решение
+	function removeClass(obj, cls)  {
+		if( obj.className == '' )		// можно также if( !obj.className )
+			return;
+
+		if( !cls )						// можно также if( !cls )
+			return;
+
+		var classes = obj.className ? obj.className.split(' ') : [];	// если верхний if поменять, то можно также просто var classes = obj.className.split(' ');
+		var classesRenewed = [];
+		for(var i = 0; i < classes.length; i++)  {
+		if( classes[i] != cls )
+			classesRenewed.push(classes[i]); 
+		}
+		obj.className = classesRenewed.join(' ');
+	}
+	
+	/*
+	// Решение из учебника
+	function removeClass(obj, cls) {
+		var classes = obj.className.split(' ');
+
+		for (var i = 0; i < classes.length; i++) {
+		if (classes[i] == cls) {
+			classes.splice(i, 1); // удалить класс
+			i--; // (*)
+			}
+		}
+		obj.className = classes.join(' ');
+	}
+	*/
+	
+	describe("removeClass", function() {
+
+		it("ничего не делает, если класса нет", function() {
+			var obj = {
+				className: 'open menu'
+			};
+			removeClass(obj, 'new');
+			assert.deepEqual(obj, {
+				className: 'open menu'
+			});
+		});
+
+		it("ничего не делает, если класс - пустая строка", function() {
+			var obj = {
+				className: 'open menu'
+			};
+			removeClass(obj, '');
+			assert.deepEqual(obj, {
+				className: 'open menu'
+			});
+		});
+
+		it("ничего не делает, если класс не задан", function() {
+		var obj = {
+				className: 'open menu'
+			};
+			removeClass(obj);
+			assert.deepEqual(obj, {
+				className: 'open menu'
+			});
+		});
+
+		it("не меняет пустое свойство", function() {
+			var obj = {
+				className: ''
+			};
+			removeClass(obj, 'new');
+			assert.deepEqual(obj, {
+				className: ""
+			});
+		});
+
+		it("удаляет класс, не оставляя лишних пробелов", function() {
+		var obj = {
+				className: 'open menu'
+			};
+			removeClass(obj, 'open');
+			assert.deepEqual(obj, {
+				className: "menu"
+			});
+		});
+
+		it("если класс один и он удалён, то результат - пустая строка", function() {
+		var obj = {
+				className: "menu"
+			};
+			removeClass(obj, 'menu');
+			assert.deepEqual(obj, {
+				className: ""
+			});
+		});
+
+		it("удаляет класс из середины списка", function() {
+		var obj = {
+				className: "open menu now"
+			};
+			removeClass(obj, 'menu');
+			assert.deepEqual(obj, {
+				className: "open now"
+			});
+		});
+
+		it("удаляет повторяющийся класс из середины списка", function() {
+		var obj = {
+				className: "open menu menu zero"
+			};
+			removeClass(obj, 'menu');
+			assert.deepEqual(obj, {
+				className: "open zero"
+			});
+		});
+
+	});
+
+  </script>
+
+</body>
+</html>

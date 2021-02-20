@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+  <script>
+	// Добавить класс в строку
+	'use strict'
+	// Моё решение
+    function addClass(obj, cls)  {
+      if( obj["className"] == '' ) {
+        obj["className"] = cls;
+      }
+      else {
+        var classesArr = obj["className"].split(' ');
+        var classesObj = {};
+        for(var i = 0; i < classesArr.length; i++)  {
+          classesObj[classesArr[i]] = true;
+        }
+        if( !classesObj[cls] )  {
+          classesArr.push(cls);
+          obj["className"] = classesArr.join(' ');
+        }
+      }
+    }
+	
+	/*
+	// Решение из учебника
+	function addClass(obj, cls) {
+		var classes = obj.className ? obj.className.split(' ') : [];
+
+		for (var i = 0; i < classes.length; i++) {
+			if (classes[i] == cls) return; // класс уже есть
+		}
+
+		classes.push(cls); // добавить
+
+		obj.className = classes.join(' '); // и обновить свойство
+    }
+	*/
+
+	describe("addClass", function() {
+
+		it("добавляет класс, которого нет", function() {
+			var obj = {
+				className: 'open menu'
+			};
+			addClass(obj, 'new');
+			assert.deepEqual(obj, {
+				className: 'open menu new'
+			});
+		});
+
+		it("не добавляет класс, который уже есть", function() {
+			var obj = {
+				className: 'open menu'
+			};
+			addClass(obj, 'open');
+			assert.deepEqual(obj, {
+				className: 'open menu'
+			});
+		});
+
+		it("не добавляет лишних пробелов, который уже есть", function() {
+			var obj = {
+				className: ''
+			};
+			addClass(obj, 'open');
+			assert.deepEqual(obj, {
+				className: 'open'
+			});
+		});
+
+	});
+  </script>
+
+</body>
+</html>

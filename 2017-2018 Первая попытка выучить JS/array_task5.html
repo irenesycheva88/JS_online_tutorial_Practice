@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    'use strict';
+	// Моё решение
+	var numbers = [];
+	
+	while(true)  {
+		var input = prompt("Введите число (пустая строка, не число или кнопка \"Отмена\" завершат ввод):", "");
+		if( isNumeric(input) )
+			numbers.push(+input);
+		else
+			break;
+	}
+	
+	var sum = 0;
+	for(var i = 0; i < numbers.length; i++)
+		sum += numbers[i];
+	
+	alert( sum );
+	
+	function isNumeric(n)  {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+	
+	/*
+	// Решение из учебника
+	var numbers = [];
+    
+    while (true) {
+    
+		var value = prompt("Введите число", 0);
+    
+		if (value === "" || value === null || isNaN(value)) break;
+    
+		numbers.push(+value);
+    }
+    
+    var sum = 0;
+    for (var i = 0; i < numbers.length; i++) {
+		sum += numbers[i];
+    }
+    
+    alert( sum );
+	*/
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+	<script src="test.js"></script>
+</head>
+<body>
+
+	<script>
+		// ¬ывод чисел каждые N мс
+
+		'use strict';
+
+		/*
+		// ћоЄ первоначальное решение. “есты проходит, но потенциально может привести к ошибкам,
+		// если в программе параллельно еще будут устанавливатьс€ таймеры планировщики
+		// ∆аль, что мне немного не хватило пон€ть это до того, как € подсмотрела решение из учебника
+		function debounce(f, ms) {
+			var timerId;
+
+			return function() {
+				clearTimeout(timerId);		// здесь можно удалить планировшик дл€ другой функции
+
+				var savedThis = this;
+				var savedArgs = arguments;
+
+				timerId = setTimeout(function() {
+					f.apply(savedThis, savedArgs);
+				}, ms);
+			}
+		}
+		*/
+		
+		// ћоЄ доработанное решение после того, как € подсмотрела решение из учебника
+		// ѕо смыслу очень на него похоже, только форма у решени€ из учебника более "продвинута€"
+		// ћы такое близко еще пока изучали, так что мо€ форма простительна
+		function debounce(f, ms) {
+			var timerId = null;
+
+			return function() {
+				if(timerId) {
+					clearTimeout(timerId);
+				}
+				var savedThis = this;
+				var savedArgs = arguments;
+
+				timerId = setTimeout(function() {
+					f.apply(savedThis, savedArgs);
+					timerId = null;
+				}, ms);
+			}
+		}
+
+		/*
+		// –ешение из учебника
+		function debounce(f, ms) {
+
+			let timer = null;
+
+			return function (...args) {
+				const onComplete = () => {
+					f.apply(this, args);
+					timer = null;
+				}
+
+				if (timer) {
+					clearTimeout(timer);
+				}
+
+				timer = setTimeout(onComplete, ms);
+			};
+		}
+		*/
+	</script>
+
+</body>
+</html>

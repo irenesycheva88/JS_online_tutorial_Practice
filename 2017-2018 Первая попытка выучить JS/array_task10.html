@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+  <script>
+    function getMaxSubSum(arr)  {
+      var arrLength = arr.length;
+      
+      if(arrLength == 0)
+        return 0;
+      
+      var positiveFound = false; 
+      for(var i = 0; i < arrLength; i++)  {
+        if(arr[i] > 0)  {
+          positiveFound = true;
+          break;
+        }
+      }
+      if(!positiveFound)
+        return 0;
+        
+      if(arrLength == 1)
+        return arr[0];
+       
+      var maxSubSum = 0;
+      for(var i = 0; i < arrLength; i++)  {
+        if(arr[i] > maxSubSum)
+          maxSubSum = arr[i];
+      }
+      for(var subArrLength = 2; subArrLength <= arrLength; subArrLength++)  {
+        for(var i = 0; i < subArrLength; i++)  {
+          var currInd = i;
+          while(arrLength - currInd >= subArrLength)
+          { 
+            var subSum = 0;
+            for(var j = 0; j < subArrLength; j++, currInd++) {
+              subSum += arr[currInd];
+            }
+            if(subSum > maxSubSum)
+              maxSubSum = subSum;
+          }
+        }
+      }
+	  
+	  /*
+      // Медленное решение из учебника (закодировано мной по их подсказке)
+      for(var i = 0; i < arrLength; i++)  {
+        var subSum = 0;
+        for(var j = i; j < arrLength; j++)  {
+          subSum += arr[j];
+          if(subSum > maxSubSum)  // аналогично конструкции maxSubSum = Math.max(maxSubSum, subSum);
+            maxSubSum = subSum;
+        }
+      }
+      */
+      return maxSubSum;     
+    }
+	
+describe("getMaxSubSum", function() {
+	it("maximal subsum of [1, 2, 3] equals 6", function() {
+		assert.equal(getMaxSubSum([1, 2, 3]), 6);
+	});
+
+	it("maximal subsum of [-1, 2, 1, 3] equals 6", function() {
+		assert.equal(getMaxSubSum([-1, 2, 1, 3]), 6);
+	});
+
+	it("maximal subsum of [-1, 2, 3, -9] equals 5", function() {
+		assert.equal(getMaxSubSum([-1, 2, 3, -9]), 5);
+	});
+
+	it("maximal subsum of [-1, 2, 3, -9, 11] equals 11", function() {
+		assert.equal(getMaxSubSum([-1, 2, 3, -9, 11]), 11);
+	});
+
+	it("maximal subsum of [-1, -2, 30, -3, -9, 11] equals 30", function() {
+		assert.equal(getMaxSubSum([-1, -2, 30, -3, -9, 11]), 30);
+	});
+
+	it("maximal subsum of [2, -1, 30, -3, -9, 11] equals 31", function() {
+		assert.equal(getMaxSubSum([2, -1, 30, -3, -9, 11]), 31);
+	});
+
+	it("maximal subsum of [-2, -1, 1, 2] equals 3", function() {
+		assert.equal(getMaxSubSum([-2, -1, 1, 2]), 3);
+	});
+
+	it("maximal subsum of [100, -9, 2, -3, 5] equals 100", function() {
+		assert.equal(getMaxSubSum([100, -9, 2, -3, 5]), 100);
+	});
+
+	it("maximal subsum of [] equals 0", function() {
+		assert.equal(getMaxSubSum([]), 0);
+	});
+
+	it("maximal subsum of [-1] equals 0", function() {
+		assert.equal(getMaxSubSum([-1]), 0);
+	});
+
+	it("maximal subsum of [-1, -2] equals 0", function() {
+		assert.equal(getMaxSubSum([-1, -2]), 0);
+	});
+
+	it("maximal subsum of [0, 0, 0, 0] equals 0", function() {
+		assert.equal(getMaxSubSum([0, 0, 0, 0]), 0);
+	});
+});
+  </script>
+
+</body>
+</html>

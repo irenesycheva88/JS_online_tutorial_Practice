@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+<script>
+	// Строковый буфер с очисткой
+
+	'use strict';
+
+	function makeBuffer() {
+
+		var buffer = "";
+
+		function buff(str) {
+
+			if (arguments.length != 0)
+				buffer += str;
+
+			return buffer;
+		};
+
+		buff.clear = function() {
+			buffer = "";
+		};
+
+		return buff;
+	}
+
+	var buffer;
+
+	beforeEach(function() {
+		buffer = makeBuffer();
+	});
+
+	it("возвращает пустую строку по умолчанию", function() {
+		assert.strictEqual(buffer(), "");
+	});
+
+	it("добавляет аргументы в буффер", function() {
+		buffer('Замыкания');
+		buffer(' Использовать');
+		buffer(' Нужно!');
+		assert.equal(buffer(), 'Замыкания Использовать Нужно!');
+	});
+
+	it("приводит всё к строке", function() {
+		buffer(null);
+		buffer(false);
+		assert.equal(buffer(), "nullfalse");
+	});
+
+	it("очищает буфер вызовом clear", function() {
+		buffer("test");
+		buffer.clear();
+		buffer("первый");
+		buffer("второй");
+		assert.equal(buffer(), "первыйвторой");
+	});
+</script>
+
+</body>
+</html>

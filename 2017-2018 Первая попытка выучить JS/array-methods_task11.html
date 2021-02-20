@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+	<script>
+		// Оставить уникальные элементы массива
+		'use strict'
+		// Моё решение
+		function unique(arr)  {
+		if ( arr.length <= 1 )
+			return arr;
+
+		var sorted = {};
+		var result = [];
+		for(var i = 0; i < arr.length; i++)  {
+			if( !sorted[arr[i]] )  {
+				sorted[arr[i]] = true;
+				result.push(arr[i]);
+			}
+		}
+
+		return result;
+		}
+		
+		/*
+		// Решения из учебника (моё решение похоже на их быстрое, но немного отличается, не знаю, какое лучше)
+		// Медленное решение
+		function unique(arr) {
+			var result = [];
+
+			nextInput:
+			for (var i = 0; i < arr.length; i++) {
+				var str = arr[i]; // для каждого элемента
+				for (var j = 0; j < result.length; j++) { // ищем, был ли он уже?
+					if (result[j] == str) continue nextInput; // если да, то следующий
+				}
+				result.push(str);
+			}
+			return result;
+		}
+		
+		// Быстрое решение
+		function unique(arr) {
+			var obj = {};
+
+			for (var i = 0; i < arr.length; i++) {
+				var str = arr[i];
+				obj[str] = true; // запомнить строку в виде свойства объекта
+			}
+
+			return Object.keys(obj); // или собрать ключи перебором для IE8-
+		}
+		*/
+		
+		describe("unique", function() {
+			it("убирает неуникальные элементы из массива", function() {
+				var strings = ["кришна", "кришна", "харе", "харе",
+					"харе", "харе", "кришна", "кришна", "8-()"
+				];
+
+				assert.sameMembers(unique(strings), ["кришна", "харе", "8-()"]);
+			});
+
+			it("не изменяет исходный массив", function() {
+				var strings = ["кришна", "кришна", "харе", "харе"];
+				unique(strings);
+				assert.sameMembers(strings, ["кришна", "кришна", "харе", "харе"]);
+			});
+		});
+	</script>
+
+</body>
+</html>

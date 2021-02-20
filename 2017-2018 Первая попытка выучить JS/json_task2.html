@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Превратите объекты со ссылками в JSON
+
+		'use strict';
+
+		var leader = {
+			name: "Василий Иванович"
+		};
+
+		var soldier = {
+			name: "Петька"
+		};
+
+		// эти объекты ссылаются друг на друга!
+		leader.soldier = soldier;
+		soldier.leader = leader;
+
+		var team = [leader, soldier];
+
+		/*
+		alert( JSON.stringify(team, function(key, value) {
+		if(key == 'leader' || key == 'soldier') return undefined;
+		  return value;
+		}) 
+		);
+		*/
+
+		/*
+		// Первое решение, плоховатое
+		team.toJSON = function() {
+			var resStrJSON = '[';
+			resStrJSON += JSON.stringify(team[0], function(key, value) {
+							if(key == 'leader') return undefined;
+							  return value;
+							});
+			resStrJSON += ',';
+			resStrJSON += JSON.stringify(team[1], function(key, value) {
+							if(key == 'soldier') return undefined;
+							  return value;
+							});
+			resStrJSON += ']';
+			return resStrJSON;
+		}
+
+		var resStrJSON = JSON.stringify(team);
+		alert( resStrJSON );
+		var team2 = JSON.parse(parse(resStrJSON));
+		team2 = JSON.parse(team2);
+		*/
+		
+		// Второе решение, после просмотра подсказки
+		team.toJSON = function() {
+			var res = [{}, {}];
+			res[0].name = this[0].name;
+			res[1].name = this[1].name;
+			return res;
+		}
+
+		var resStrJSON = JSON.stringify(team);
+		//alert( resStrJSON );
+		
+		JSON.parseTeam = function(str) {
+		    var team = JSON.parse(str);
+		    team[0].soldier = team[1];
+		    team[1].leader  = team[0];
+		    //alert(team);
+		    return team;
+		}
+		
+		var team2 = JSON.parseTeam(resStrJSON);
+		
+		
+		alert( team2[0].name );
+		alert( team2[0].soldier.name );
+		alert( team[0].soldier.leader.name );
+		alert( team2[0].soldier.leader.name );
+		alert( team2[1].name );
+		alert( team2[1].leader.name );
+	</script>
+</body>
+
+</html>

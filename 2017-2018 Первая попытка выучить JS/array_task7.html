@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+  <script>
+	// Моё решение
+    function findCustom(array, value)  {
+      for(var i = 0; i < array.length; i++)  {
+        if(String(array[i]) == String(value))		// возможно, это неправильный подход, но моя функция проходит тесты
+          return i;
+      }
+      return -1;
+    }
+	
+	/*
+	// Решение из учебника
+	// создаем пустой массив и проверяем поддерживается ли indexOf
+	if ([].indexOf) {
+
+		var findCustom = function(array, value) {
+			return array.indexOf(value);
+		}
+
+		} else {
+		  var findCustom = function(array, value) {
+			for (var i = 0; i < array.length; i++) {
+				if (array[i] === value) return i;	//	строгое равенство вместо привидения к String
+		}
+
+		return -1;
+		}
+	}
+	*/
+
+	describe("findCustom", function() {
+
+		describe("возвращает позицию, на которой найден элемент", function() {
+			it("в массиве [1,2,3] находит 1 на позиции 0", function() {
+				assert.equal(findCustom([1, 2, 3], 1), 0);
+			});
+			it("в массиве [1,2,3] находит 2 на позиции 1", function() {
+				assert.equal(findCustom([1, 2, 3], 2), 1);
+			});
+			it("в массиве [1,2,3] находит 3 на позиции 2", function() {
+				assert.equal(findCustom([1, 2, 3], 3), 2);
+			});
+		});
+
+		it("если элемент не найден, возвращает -1", function() {
+			assert.equal(findCustom([1, 2, 3], 0), -1);
+		});
+
+		it("отличает false или null от 0", function() {
+			assert.equal(findCustom([false, true, null], 0), -1);
+		});
+
+		it("отличает 1 от true", function() {
+			assert.equal(findCustom([1, 2, 3], true), -1);
+		});
+	});
+  </script>
+
+</body>
+</html>

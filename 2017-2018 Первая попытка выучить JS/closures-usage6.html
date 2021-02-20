@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+<script>
+	//Армия функций
+
+	'use strict';
+	
+	function makeArmy(i) {
+
+		var shooters = [];
+
+		for (var i = 0; i < 10; i++) {
+			shooters[i] = makeShooter(i);
+		}
+
+		function makeShooter(a) {
+			return function() { // функция-стрелок
+				alert( a ); // выводит свой номер
+			}
+		}
+
+		return shooters;
+	}
+	
+	var army;
+	before(function() {
+		army = makeArmy();
+		window.alert = sinon.stub(window, "alert");
+	});
+
+	it("army[0] выводит 0", function() {
+		army[0]();
+		assert(alert.calledWith(0));
+	});
+
+
+	it("army[5] функция выводит 5", function() {
+		army[5]();
+		assert(alert.calledWith(5));
+	});
+
+	after(function() {
+		window.alert.restore();
+	});
+
+</script>
+
+</body>
+</html>

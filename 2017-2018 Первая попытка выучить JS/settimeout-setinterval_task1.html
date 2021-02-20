@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Вывод чисел каждые 100 мс
+		
+		'use strict';
+
+		function printNumbersInterval() {
+		var i = 1;
+		var timerId = setInterval(function () {
+
+			if(i == 20) 
+				clearInterval(timerId);
+
+			console.log(i++);
+		}, 100);
+		//alert(timerId);
+
+		/*
+		// Еще можно вот так остановить таймер, но этот способ ненадёжный, так как может остановить
+		// или раньше, чем выведется 20 чисел, или позже 
+		setTimeout(function() {  // в эту ф-ю нельзя передать timerId, он будет undefined (почему?)
+		//alert(timerId);
+		clearInterval(timerId);
+		console.log('стоп');
+		}, 2000);
+		*/
+	}
+
+	printNumbersInterval();
+	</script>
+</body>
+
+</html>

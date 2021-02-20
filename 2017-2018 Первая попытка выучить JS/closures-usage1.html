@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Сумма через замыкание
+		
+		'use strict';
+		function sum(a) {
+			a = a || 0;
+			return function(b) {
+				b = b || 0;
+				return a + b;
+			}
+		}
+
+		alert( sum(1)(2) );
+		alert( sum(5)(-1) );
+	</script>
+</body>
+
+</html>

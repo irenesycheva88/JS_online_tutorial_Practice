@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+  <script>
+  /*
+  // Моё решение
+  function checkSpam(str) {
+    var upperStr = str.toUpperCase();
+    return (~upperStr.indexOf("VIAGRA") || ~upperStr.indexOf("XXX")) ? true : false;
+  }
+  */
+  
+  // Решение из учебника
+  function checkSpam(str) {
+  var lowerStr = str.toLowerCase();
+
+  return !!(~lowerStr.indexOf('viagra') || ~lowerStr.indexOf('xxx'));
+  }
+  
+  describe("checkSpam", function() {
+  it('finds spam in "buy ViAgRA now"', function() {
+    assert.isTrue(checkSpam('buy ViAgRA now'));
+  });
+
+  it('finds spam in "free xxxxx"', function() {
+    assert.isTrue(checkSpam('free xxxxx'));
+  });
+
+  it('no spam in "innocent rabbit"', function() {
+    assert.isFalse(checkSpam('innocent rabbit'));
+  });
+  });
+
+  </script>
+
+</body>
+</html>

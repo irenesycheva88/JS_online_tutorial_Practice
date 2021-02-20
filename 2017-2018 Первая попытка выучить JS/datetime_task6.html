@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Сколько секунд уже прошло сегодня?
+
+		'use strict';
+
+		// Моё решение
+		function getSecondsToday() {
+			var date = new Date();
+
+			return date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
+		}
+		
+		/*
+		// Решение из учебника
+		function getSecondsToday() {
+			var now = new Date();
+
+			// создать объект из текущей даты, без часов-минут-секунд
+			var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+			var diff = now - today; // разница в миллисекундах
+			return Math.floor(diff / 1000); // перевести в секунды
+		}
+		*/
+
+		alert( getSecondsToday() );
+	</script>
+</body>
+
+</html>

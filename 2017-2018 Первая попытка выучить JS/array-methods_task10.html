@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+	<script>
+		// Отфильтровать анаграммы
+		'use strict'
+		// Моё решение
+		function aclean(arr)  {
+			if ( arr.length <= 1 )
+				return arr;
+
+			var uniqueSorted = {};
+			var result = [];
+			for(var i = 0; i < arr.length; i++)  {
+				var sorted = arr[i].toUpperCase().split('').sort().join('');
+
+				if( !uniqueSorted[sorted] )
+				{
+					uniqueSorted[sorted] = true;
+					result.push(arr[i]);
+				}
+			}
+
+			return result;
+		}
+		
+		// Решение из учебника (моё решение мне нравится больше)
+		/*
+		function aclean(arr) {
+			var obj = {};
+
+			for (var i = 0; i < arr.length; i++) {
+				var sorted = arr[i].toLowerCase().split("").sort().join("");
+				obj[sorted] = arr[i];
+			}
+
+			var result = [];
+
+			for (var key in obj) {
+				result.push(obj[key]);
+			}
+
+			return result;
+		}
+		*/
+		
+		function intersection(arr1, arr2) {
+			return arr1.filter(function(item) {
+				return arr2.indexOf(item) != -1;
+			});
+		}
+
+		describe("aclean", function() {
+
+			it("содержит ровно по 1 слову из каждого набора анаграмм", function() {
+				var arr = ["воз", "киборг", "корсет", "зов", "гробик", "костер", "сектор"];
+
+				var result = aclean(arr);
+				assert.equal(result.length, 3);
+
+				assert.equal(intersection(result, ["гробик", "киборг"]).length, 1);
+				assert.equal(intersection(result, ["воз", "зов"]).length, 1);
+				assert.equal(intersection(result, ["корсет", "сектор", "костер"]).length, 1);
+
+			});
+
+			it("не различает регистр символов", function() {
+				var arr = ["воз", "ЗОВ"];
+				assert.equal(aclean(arr).length, 1);
+			});
+
+		});
+	</script>
+
+</body>
+</html>

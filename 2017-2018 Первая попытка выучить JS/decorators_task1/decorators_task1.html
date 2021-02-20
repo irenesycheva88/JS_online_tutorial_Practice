@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+	<script src="test.js"></script>
+	</head>
+<body>
+
+	<script>
+		// Логирующий декоратор (1 аргумент)
+
+		'use strict'
+
+		// Моё решение
+		function makeLogging(f, log) {
+			return function() {
+				if(arguments.length >= 1)
+					log.push(arguments[0]);
+				return f.apply(this, arguments);
+			}
+		}
+
+		/*
+		// Решение из учебника (моё почти такое, может, даже лучше)
+		function makeLogging(f, log) {
+
+			function wrapper(a) {
+				log.push(a);
+				return f.call(this, a);
+			}
+
+			return wrapper;
+		}
+		*/
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+	<script>
+		// День недели в европейской нумерации
+	
+		'use strict';
+		
+		// Моё решение
+		function getLocalDay(date) {
+		var days = [7, 1, 2, 3, 4, 5, 6];
+
+		return days[date.getDay()];
+		}
+		
+		/*
+		// Решение из учебника
+		function getLocalDay(date) {
+
+			var day = date.getDay();
+
+			if (day == 0) { // день 0 становится 7
+				day = 7;
+			}
+
+			return day;
+		}
+		*/
+		
+		describe("getLocalDay возвращает день недели", function() {
+			it("3 января 2014 - пятница", function() {
+				assert.equal(getLocalDay(new Date(2014, 0, 3)), 5);
+			});
+
+			it("4 января 2014 - суббота", function() {
+				assert.equal(getLocalDay(new Date(2014, 0, 4)), 6);
+			});
+
+			it("5 января 2014 - воскресенье", function() {
+				assert.equal(getLocalDay(new Date(2014, 0, 5)), 7);
+			});
+
+			it("6 января 2014 - понедельник", function() {
+				assert.equal(getLocalDay(new Date(2014, 0, 6)), 1);
+			});
+
+			it("7 января 2014 - вторник", function() {
+				assert.equal(getLocalDay(new Date(2014, 0, 7)), 2);
+			});
+
+			it("8 января 2014 - среда", function() {
+				assert.equal(getLocalDay(new Date(2014, 0, 8)), 3);
+			});
+
+			it("9 января 2014 - четверг", function() {
+				assert.equal(getLocalDay(new Date(2014, 0, 9)), 4);
+			});
+		});
+	</script>
+
+</body>
+</html>

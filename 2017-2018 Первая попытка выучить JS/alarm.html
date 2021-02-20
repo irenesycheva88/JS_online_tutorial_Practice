@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Kate's alarm</h2>
+
+Minutes for good sleep:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input id="XX" size="3">
+<br>
+Now is:<input id="HH" size="3"> hours and <input id="MM" size="3"> minutes
+<br>
+<button type="button" onclick="getTimeForAlarm()">Submit</button>
+
+<br>
+<br>
+Kate, you should set your alarm at: 
+<p id="result"></p>
+
+<script>
+function getTimeForAlarm()
+{
+	var XX = document.getElementById("XX").value;
+	var HH = document.getElementById("HH").value;
+	var MM = document.getElementById("MM").value;
+	//alert(60 * HH + 1 * MM);
+	var resHH = (60 * HH + 1 * MM + 1 * XX)/60;
+	var resMM = (60 * HH + 1 * MM + 1 * XX)%60;
+	document.getElementById("result").innerHTML = ~~resHH + ":" + resMM;
+}
+</script>
+
+</body>
+</html>
+

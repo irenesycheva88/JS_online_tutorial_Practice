@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+</head>
+<body>
+
+	<script>
+		// Создать Calculator при помощи конструктора
+
+		'use strict'
+
+		function Calculator() {
+
+			this.read = function() {
+
+				this.a = +prompt("a?", 0);
+				this.b = +prompt("b?", 0);
+			};
+
+			this.sum = function() {
+
+				return this.a + this.b;
+			};
+
+			this.mul = function() {
+
+				return this.a * this.b;
+			}
+		}
+		
+		sinon.stub(window, "prompt")
+
+		prompt.onCall(0).returns("2");
+		prompt.onCall(1).returns("3");
+
+		describe("calculator", function() {
+			var calculator;
+			before(function() {
+				calculator = new Calculator();
+				calculator.read();
+			});
+
+			it("при вводе 2 и 3 сумма равна 5", function() {
+				assert.equal(calculator.sum(), 5);
+			});
+
+			it("при вводе 2 и 3 произведение равно 6", function() {
+				assert.equal(calculator.mul(), 6);
+			});
+
+		});
+
+		after(function() {
+			prompt.restore();
+		});
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+<script>
+	// День указанное количество дней назад
+	
+	'use strict';
+	
+	function getDateAgo(date, days) {
+
+		var newdate = new Date(date);
+		newdate.setDate(newdate.getDate() - days);
+		return newdate.getDate();
+	}
+	
+	describe("getDateAgo", function() {
+
+		it("1 день до 02.01.2015 -> число 1", function() {
+			assert.equal(getDateAgo(new Date(2015, 0, 2), 1), 1);
+		});
+
+		it("2 день до 02.01.2015 -> число 31", function() {
+			assert.equal(getDateAgo(new Date(2015, 0, 2), 2), 31);
+		});
+
+		it("100 дней от 02.01.2015 -> число 24", function() {
+			assert.equal(getDateAgo(new Date(2015, 0, 2), 100), 24);
+		});
+
+		it("365 дней от 02.01.2015 -> число 2", function() {
+			assert.equal(getDateAgo(new Date(2015, 0, 2), 365), 2);
+		});
+
+		it("не меняет переданный объект Date", function() {
+			var date = new Date(2015, 0, 2);
+			var dateCopy = new Date(date);
+			getDateAgo(dateCopy, 100);
+			assert.equal(date.getTime(), dateCopy.getTime());
+		});
+
+	});
+</script>
+
+</body>
+</html>

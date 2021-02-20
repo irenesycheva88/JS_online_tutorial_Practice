@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+  <script>
+	/*
+	// Моё решение
+    function isEmpty(obj) {
+      var counter = 0;
+      for(key in obj)  // !!! я забыла объявить переменную key
+        counter++;
+        
+      return (counter == 0) ? true : false;
+    }
+	*/
+	
+	// Решение из учебника
+	function isEmpty(obj) {
+		for (var key in obj) {
+			return false;
+		}
+		return true;
+	}
+	
+	describe("isEmpty", function() {
+		it("returns true for an empty object", function() {
+			assert.isTrue(isEmpty({}));
+		});
+
+		it("returns false if a property exists", function() {
+			assert.isFalse(isEmpty({
+				anything: false
+			}));
+		});
+	});
+  </script>
+
+</body>
+</html>

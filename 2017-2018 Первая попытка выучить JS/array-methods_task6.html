@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+	<script>
+		// Скопировать и отсортировать массив
+		'use strict'
+		var arr = ["HTML", "JavaScript", "CSS"];
+		var arrSorted = [];
+
+		// Моё решение (получилось слишком много кода)
+		for(var i = 0; i < arr.length; i++)  {
+			arrSorted.push(arr[i]);
+		}
+
+		arrSorted.sort();
+		
+		/*
+		// Решение из учебника
+		var arrSorted = arr.slice().sort();
+		*/
+		
+		alert( arrSorted ); // CSS, HTML, JavaScript
+		alert( arr ); // HTML, JavaScript, CSS (без изменений)
+
+	</script>
+
+</body>
+</html>

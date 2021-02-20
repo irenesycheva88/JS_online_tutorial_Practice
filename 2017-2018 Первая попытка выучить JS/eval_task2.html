@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Eval-калькулятор с ошибками
+		'use strict';
+		
+		// Моё решение, отличается от решения из учебника хотя бы тем, что калькулятор обёрнут в функцию
+		// но главное отличие не в этом: моя ф-я запускается рекурсивно, а не в цикле, как в учебнике
+		// Работает аналогично приложенному к задаче Demo
+
+		function promptCalc() {
+			try {
+				var epxr = prompt('Введите выражение?', '2-');
+				var result = eval(epxr);
+
+				if(isNaN(result)) 
+					throw new Error('Result is NaN!');
+
+				return result;
+			} catch(e) {
+				alert('Ошибка при вводе выражения:\n' + e.message + 
+				'\nПовторите ввод');
+				return promptCalc();
+			}
+		}
+
+		alert( promptCalc() );
+		
+		/*
+		// Решение из учебника
+		var expr, res;
+
+		while (true) {
+			expr = prompt("Введите выражение?", '2-');
+			if (expr == null) break;
+
+			try {
+				res = eval(expr);
+				if (isNaN(res)) {
+				throw new Error("Результат неопределён");
+			}
+
+			break;
+			} catch (e) {
+				alert( "Ошибка: " + e.message + ", повторите ввод" );
+			}
+		}
+		*/
+		
+		/*
+		// Решение из учебника, измененное мною:
+		// хотела проверить, как будет работать, если обернуть в функцию
+		// Рез.: работает хорошо
+		function promptCalc() {
+			var expr, res;
+
+			while (true) {
+				expr = prompt("Введите выражение?", '2-');
+				if (expr == null) return null;
+
+				try {
+					res = eval(expr);
+					if (isNaN(res)) {
+					throw new Error("Результат неопределён");
+				}
+
+				return res;
+				} catch (e) {
+					alert( "Ошибка: " + e.message + ", повторите ввод" );
+				}
+			}
+		}
+		
+
+		alert( promptCalc() );
+		*/
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Создать сеттер для onReady
+
+		'use strict';
+		function CoffeeMachine(power, capacity) {
+
+			var waterAmount = 0;
+
+			var WATER_HEAT_CAPACITY = 4200;
+
+			function getTimeToBoil() {
+				return waterAmount * WATER_HEAT_CAPACITY * 80 / power;
+			}
+
+			this.setWaterAmount = function(amount) {
+				if (amount < 0) {
+					throw new Error("Значение должно быть положительным");
+				}
+				if (amount > capacity) {
+					throw new Error("Нельзя залить больше, чем " + capacity);
+				}
+
+				waterAmount = amount;
+			};
+
+			this.getWaterAmount = function() {
+				return waterAmount;
+			}
+
+			function onReady() {
+				alert( 'Кофе готов!' );
+			}
+
+			// отредактированный метод this.run из учебника
+			this.run = function() {
+				setTimeout(function() {
+				onReady();
+				}, getTimeToBoil());
+			};
+			/*
+			// Я не стала трогать этот метод, и у меня тоже вроде бы работает, 
+			// Авторы учебника его отредактировали и написали, что без редактирования работать не будет.
+			// Не знаю почему.
+			this.run = function() {
+				setTimeout(onReady, getTimeToBoil());
+			};
+			*/
+
+			// Метод this.addWater, универсальный:
+			// можно не только добавлять воду в чайник, но и выливать
+			this.addWater = function(amount) {
+				this.setWaterAmount(waterAmount + amount);
+			}
+			
+			/*
+			// Мой метод this.addWater, метод из учебника лучше, в нём меньше избыточности кода и он более универсальный:
+			// можно не только добавлять воду в чайник, но и выливать
+			this.addWater = function(amount) {
+				if (amount < 0) {
+					throw new Error("Значение должно быть положительным");
+				}
+				if (waterAmount + amount > capacity) {
+					throw new Error("Нельзя залить больше, чем " + capacity);
+				}
+
+				waterAmount += amount;
+			}
+			*/
+
+			this.setOnReady = function(newOnReady) {
+				onReady = newOnReady;
+			}
+		}
+
+		var coffeeMachine = new CoffeeMachine(20000, 500);
+		coffeeMachine.setWaterAmount(150);
+
+
+		coffeeMachine.setOnReady(function() {
+			var amount = coffeeMachine.getWaterAmount();
+			alert( 'Готов кофе: ' + amount + 'мл' ); // Кофе готов: 150 мл
+		});
+
+		coffeeMachine.run();
+	</script>
+</body>
+
+</html>

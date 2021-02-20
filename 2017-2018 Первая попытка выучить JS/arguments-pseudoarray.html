@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		'use strict';
+		// Проверка того, что при копировании-объединении 
+		// нескольких объектов, у которых есть одинаковый ключ,
+		// ключ в результирующем объекте не дублируется (используется ключ из последнего объекта)
+		
+		function copy(dst) {
+			// остальные аргументы остаются безымянными
+			for (var i = 1; i < arguments.length; i++) {
+				var arg = arguments[i];
+				for (var key in arg) {
+				dst[key] = arg[key];
+			}
+		}
+
+		return dst;
+		}
+
+		function displayObj(obj) {
+
+			var result = "";
+			for(var key in obj)
+			result += key + ":" + obj[key] + "\n";
+
+			alert( result );
+		}
+
+
+		var obj1 = { a:4, b:5 };
+		var obj2 = { a:7, c:8 };
+		var dst = {};
+		displayObj(copy(dst, obj1, obj2));
+
+	</script>
+</body>
+
+</html>

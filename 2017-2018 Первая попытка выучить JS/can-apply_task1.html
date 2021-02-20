@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Перепишите суммирование аргументов
+
+		'use strict';
+
+		// Моё решение довольно ощутимо отличается от решения в учебнике, так как опять не так поняла задание, по сути сделала не так, как просили, хоть и работает
+		function sumArgs(arr) {
+
+			//var args = [].slice.call(arguments);  // можно и call, и apply 
+			var args = [].slice.apply(arguments);
+
+			return args.reduce(function(a, b) {
+				return a + b;
+			});
+		}
+		
+		/*
+		// Решение из учебника
+		// Первый вариант с одалживанием метода
+		function sumArgs() {
+			// скопируем reduce из массива
+			arguments.reduce = [].reduce;
+			return arguments.reduce(function(a, b) {
+				return a + b;
+			});
+		}
+		
+		// Второй вариант с call (apply почему-то сюда не подходит)
+		function sumArgs() {
+			// запустим reduce из массива напрямую
+			return [].reduce.call(arguments, function(a, b) {
+				return a + b;
+			});
+		}
+		*/
+
+		alert( sumArgs(1, 2, 3) ); // 6 (=1+2+3)
+		alert( sumArgs("1", 2, 3) );
+		alert( sumArgs(4, 5, 6) ); // 15
+	</script>
+	</body>
+
+</html>

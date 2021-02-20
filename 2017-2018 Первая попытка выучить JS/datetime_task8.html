@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+	<script>
+		// Вывести дату в формате дд.мм.гг
+
+		'use strict';
+
+		// Моё решение
+		function formatDate(date) {
+			var options = {
+				year: '2-digit',
+				month: '2-digit',
+				day: '2-digit'
+			};
+
+			var formatter = new Intl.DateTimeFormat("ru", options);
+
+			return formatter.format(date);
+		}
+		
+		/*
+		// Решение из учебника
+		function formatDate(date) {
+
+			var yy = date.getFullYear() % 100;
+			if(yy < 10)
+				yy = '0' + yy;
+
+			var mm = date.getMonth() + 1;
+			if(mm < 10)
+				mm = '0' + mm;
+
+			var dd = date.getDate();
+			if(dd < 10)
+				dd = '0' + dd;
+
+			return dd + '.' + mm + '.' + yy;
+		}
+		*/
+		
+		describe("formatDate", function() {
+			it("правильно форматирует дату 30.01.14", function() {
+				assert.equal(formatDate(new Date(2014, 0, 30)), '30.01.14');
+			});
+
+			it("правильно форматирует дату 01.01.01", function() {
+				assert.equal(formatDate(new Date(2001, 0, 1)), '01.01.01');
+			});
+
+			it("правильно форматирует дату 01.01.00", function() {
+				assert.equal(formatDate(new Date(2000, 0, 1)), '01.01.00');
+			});
+
+			it("правильно форматирует дату 01.10.00", function() {
+				assert.equal(formatDate(new Date(2000, 9, 1)), '01.10.00');
+			});
+		});
+	</script>
+</body>
+</html>

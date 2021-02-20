@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+  <script>
+    'use strict'
+    function filterRange(arr, a, b)  {
+      var newArr = [];
+      
+      for(var i = 0; i < arr.length; i++)  {
+        if( arr[i] >= a && arr[i] <= b)
+          newArr.push(arr[i]);
+      }
+      
+      return newArr;
+    }
+	
+	describe("filterRange", function() {
+
+		it("returns the filtered values", function() {
+
+			let arr = [5, 3, 8, 1];
+
+			let filtered = filterRange(arr, 1, 4); 
+
+			assert.deepEqual(filtered, [3, 1]);
+		});
+
+		it("doesn't change the array", function() {
+
+			let arr = [5, 3, 8, 1];
+
+			let filtered = filterRange(arr, 1, 4); 
+
+			assert.deepEqual(arr, [5,3,8,1]);
+		});
+
+	});	
+  </script>
+
+</body>
+</html>

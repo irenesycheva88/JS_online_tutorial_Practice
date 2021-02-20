@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+  <script>
+    'use strict';
+    
+    var salaries = {
+      "Вася": 100,
+      "Петя": 300,
+      "Даша": 250
+    };
+    
+	/*
+	// Моё решение (в итоге я делала совсем не то, я вывела максим. ЗП, а не имя сотрудника с максим. ЗП)
+    var maxSalary = 0;
+    var counter = 0;
+    for(var name in salaries)  {
+      counter++;
+      if(salaries[name] > maxSalary)
+        maxSalary = salaries[name];
+    }
+    
+    if(counter == 0)
+      alert("нет ссотрудников");
+    else
+      alert(maxSalary);
+    */
+	
+	// Решение из учебника
+	var max = 0;
+    var maxName = "";
+    for (var name in salaries) {
+      if (max < salaries[name]) {
+        max = salaries[name];
+        maxName = name;
+      }
+    }
+    
+    alert( maxName || "нет сотрудников" );
+  </script>
+</body>
+</html>

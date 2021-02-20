@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+	<script src="test.js"></script>
+</head>
+<body>
+
+	<script>
+	// Полиморфная функция formatDate
+
+	'use strict'
+	
+	// Моё решение
+	// Тесты проходит, но это изобретение велосипеда в чистом виде, т.к. я забыла как
+	// работать с датами: 1) что их можно создавать из строки вида '2011-10-02', 2) что выходную 
+	// строку вида '02.10.11' легко получить, используя готовые средства форматирования.
+	// Также не догадалась создать дату из массива, передать его таким способом:: new Date(date[0], date[1], date[2])
+	function getClass(obj) {
+		return {}.toString.call(obj).slice(8, -1);
+	}
+
+	function formatDate(date) {
+
+		var Class = getClass(date).toLowerCase();
+		switch(Class) {
+			case "string": {
+				return date.slice(2).split('-').reverse().join('.');
+			}
+			case "array": {
+
+				date = date.reverse();
+
+				date[0] = '0' + date[0];
+				date[1] = '0' + ( date[1] + 1 );
+				date[2] = String(date[2]);
+
+				for(var i = 0; i < date.length; i++) {
+					date[i] = date[i].slice(-2);
+				}
+
+				return date.join('.');
+			}
+			case "number": {
+				date = new Date(date);
+			}
+			case "date": {
+
+				var day =  ( '0' + date.getDate() ).slice(-2);
+				var month = ( '0' + ( date.getMonth() + 1 ) ).slice(-2);
+				var year = String(date.getFullYear()).slice(2);
+
+				return day + '.' + month + '.' + year;
+			}
+			default: {
+				alert( 'Неподдерживамый тип: ' + Class );
+				return;
+			}
+		}
+	}
+
+	/*
+	// Решение из учебника
+	function formatDate(date) {
+		if (typeof date == 'number') {
+			// перевести секунды в миллисекунды и преобразовать к Date
+			date = new Date(date);
+		} else if (typeof date == 'string') {
+			// строка в стандартном формате автоматически будет разобрана в дату
+			date = new Date(date); 
+		} else if (Array.isArray(date)) { 
+			date = new Date(date[0], date[1], date[2]);
+		}
+		// преобразования для поддержки полиморфизма завершены, 
+		// теперь мы работаем с датой (форматируем её)
+
+		return date.toLocaleString("ru", {day: '2-digit', month: '2-digit', year: '2-digit'});
+
+		/*
+		// можно и вручную, если лень добавлять в старый IE поддержку локализации
+		var day = date.getDate();
+		if (day < 10) day = '0' + day;
+
+		var month = date.getMonth() + 1;
+		if (month < 10) month = '0' + month;
+
+		// взять 2 последние цифры года
+		var year = date.getFullYear() % 100;
+		if (year < 10) year = '0' + year;
+
+		var formattedDate = day + '.' + month + '.' + year;
+
+		return formattedDate;
+		*/
+	}
+	*/
+	</script>
+
+</body>
+</html>

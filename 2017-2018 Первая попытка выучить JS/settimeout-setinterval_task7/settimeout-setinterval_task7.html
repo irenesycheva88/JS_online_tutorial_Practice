@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+	<script src="test.js"></script>
+</head>
+<body>
+
+	<script>
+		// Функция-задержка
+		'use strict'
+		function delay(f, ms) {
+		
+			return function() {
+			
+				setTimeout(function(context, args) {
+					return f.apply(context, args);		// и return тоже не нужен, т.к. он будет возвращаться в никуда
+				}, ms, this, arguments);
+			}
+		}
+		
+		/*
+		// Решение из учебника. Моё решение отличается, но, кажется, не сильно критично
+		function delay(f, ms) {
+
+			return function() {
+				var savedThis = this;
+				var savedArgs = arguments;
+
+				setTimeout(function() {
+					f.apply(savedThis, savedArgs);
+				}, ms);
+			};
+
+		}
+		*/
+
+	</script>
+
+</body>
+</html>

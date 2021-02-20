@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+	<script src="test.js"></script>
+</head>
+<body>
+
+	<script>
+	// Кеширующий декоратор
+
+	'use strict'
+
+	// Моё решение (хуже, чем решение из учебника, так как моё решение менее универсальное, и будет работать без ошибок, если точно известно, что cache[x] никогда не будет false, 0 и т.п.)
+	// Я вообще не подумала, что будет, если cache[x] равно false, 0 и т.п. Моё упущение
+	// А о том, что можно делать так: (x in cache), вообще забыла. Ещё одно моё упущение
+	function makeCaching(f) {
+
+		var cash = {};
+
+		return function(a) {
+			if(arguments.length) {
+
+				if(!cash[a])  // в учебнике приведена такая проверка: if (!(x in cache))
+					cash[a] = f.call(this, a);
+
+				return cash[a];
+			}
+		}
+	}
+
+	</script>
+
+</body>
+</html>

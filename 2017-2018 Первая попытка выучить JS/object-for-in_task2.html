@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+  <script>
+    'use strict';
+    
+    var salaries = {
+      "Вася": 100,
+      "Петя": 300,
+      "Даша": 250
+    };
+    
+	/*
+	// Моё решение
+    var salariesSum = 0;
+    for(var key in salaries)  {
+      salariesSum += salaries[key];
+    }
+      
+    alert(salariesSum);
+	*/
+	
+	// Решение из учебника
+	var sum = 0;
+	for (var name in salaries) {
+		sum += salaries[name];
+	}
+
+	alert( sum );
+  </script>
+
+</body>
+</html>

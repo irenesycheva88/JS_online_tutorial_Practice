@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Вывести односвязный список
+		'use strict';
+		var list = { value: 1 };
+		list.next = { value: 2 };
+		list.next.next = { value: 3 };
+		list.next.next.next = { value: 4 };
+
+		/*
+		// Выводит элементы списка по очереди при помощи цикла
+		function printList(list)  {
+			var current = list;
+
+			while(current)  {
+				alert(current.value);
+				current = current.next;
+			}
+		}
+
+		printList(list);
+		*/
+
+		/*
+		// Выводит элементы списка по очереди при помощи рекурсии
+		// Моё решение
+		function printList(list)  {
+			if(list) {
+				alert(list.value);
+				printList(list.next);
+			}
+		}
+
+		// Решение из учебника
+		function printList(list) {
+
+			alert( list.value ); // (1)
+
+			if (list.next) {
+				printList(list.next); // (2)
+			}
+		}
+		
+		printList(list);
+		*/
+
+		/*
+		// Выводит элементы списка в обратном порядке при помощи рекурсии
+		// Моё решение
+		function printReverseList(list)  {
+			if(list) {
+				var value = list.value;		// можно без отдельгной переменной, просто ниже сделать alert(list.value);
+				printReverseList(list.next);
+				alert(value);
+			}
+		}
+		
+		// Решение из учебника
+		function printReverseList(list) {
+
+			if (list.next) {
+				printReverseList(list.next);
+			}
+
+			alert( list.value );
+		}
+
+		printReverseList(list);
+		*/
+		// Выводит элементы списка в обратном порядке при помощи цикла
+		function printReverseList(list)  {
+			var current = list;
+			var values = [];
+
+			while(current)  {
+				values.push(current.value);
+				current = current.next;
+			}
+
+			for(var i = values.length - 1; i >= 0; i--)  {
+				alert( values[i] );
+			}
+		}
+
+		printReverseList(list);
+	</script>
+</body>
+
+</html>

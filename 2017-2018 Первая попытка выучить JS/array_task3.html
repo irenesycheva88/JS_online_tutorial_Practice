@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    'use strict';
+	var styles = ["Джаз", "Блюз"];
+	alert( styles );
+	
+	styles.push("Рок-н-Ролл");
+	alert( styles );
+	
+	if(styles.length >=2 )
+	  styles[styles.length - 2] = "Классика";
+	alert( styles );
+	
+	alert( styles.shift() );
+	alert( styles );
+	
+	styles.unshift("Рэп", "Рэгги");
+	alert( styles );
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Сколько секунд - до завтра?
+
+		'use strict';
+
+		// Моё решение
+		function getSecondsToTomorrow()  {
+			var date = new Date();
+
+			return (24 - date.getHours()) * 3600 - date.getMinutes() * 60 - date.getSeconds();
+		}
+
+
+		/*
+		// Решение из учебника
+		function getSecondsToTomorrow() {
+			var now = new Date();
+
+			// создать объект из завтрашней даты, без часов-минут-секунд
+			var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+
+			var diff = tomorrow - now; // разница в миллисекундах
+			return Math.round(diff / 1000); // перевести в секунды
+		}
+		*/
+
+
+		alert( getSecondsToTomorrow() );
+	</script>
+</body>
+
+</html>

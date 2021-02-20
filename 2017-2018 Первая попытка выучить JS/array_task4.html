@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    'use strict';
+    var arr = ["Яблоко", "Апельсин", "Груша", "Лимон"];
+    alert( arr[randomInteger(0, arr.length - 1)] );
+    
+    
+    function randomInteger(min, max)  {
+      return min + Math.floor(Math.random() * (max + 1 - min));
+    }
+  </script>
+</body>
+
+</html>

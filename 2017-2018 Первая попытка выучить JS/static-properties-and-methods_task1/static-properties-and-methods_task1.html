@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+	<script src="test.js"></script>
+</head>
+<body>
+
+	<script>
+		// Счетчик объектов
+
+		'use strict'
+
+		// Моё решение, сначала сделала немного не так - изменила код, который не надо было трогать,
+		// также не поняла из задания, что Article.showStats() должен выводить alert, а  не 
+		// return, п.э. моё решение не проходило тесты
+		// Сейчас моё решение полностью совпадает с решением из учебника
+		function Article() {
+			this.created = new Date();
+
+			Article.count++;
+			Article.last = this.created;
+		}
+
+		Article.count = 0;
+
+		Article.showStats = function() {
+			alert( 'Всего: ' + this.count + ', Последняя: ' + this.last );
+		}
+
+		//new Article();
+		//new Article();
+
+		//alert( Article.count );
+		//alert( Article.created );
+		//alert( Article.showStats() );
+	</script>
+
+</body>
+</html>

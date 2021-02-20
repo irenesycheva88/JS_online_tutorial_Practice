@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://learn.javascript.ru/test/libs.js"></script>
+	<script src="test.js"></script>
+</head>
+<body>
+
+	<script>
+		// Создайте калькулятор
+
+		'use strict'
+
+		// Моё решение (решение из учебника правильнее, так как скрывает внутри операции +, - и т.д.), а еще использует метод split для создния массива строк
+		function Calculator() {
+
+			this["+"] = function(a, b) {
+				return a + b;
+			};
+
+			this["-"] = function(a, b) {
+				return a - b;
+			};
+
+			this.addMethod = function(oper, func) {
+				this[oper] = func;
+			};
+
+			this.calculate = function (str) {
+
+				var pos = str.indexOf(' ');
+				var a = +str.slice(0, pos);
+
+				if(isNaN(a)) {
+					alert('Первое число введено некорректно!');
+					return;
+				}
+
+				str = str.slice(pos + 1);
+				pos = str.indexOf(' ');
+				var oper = str.slice(0, pos);
+
+				var b = +str.slice(pos + 1);
+
+				if(isNaN(b)) {
+					alert('Второе число введено некорректно!');
+					return;
+				}
+
+				if(this[oper]) {
+					return this[oper](a, b);
+				}
+				else {
+					alert('Операция не найдена!');
+					return;
+				}
+			}
+		}
+		
+		/*
+		// Решение из учебника
+		function Calculator() {
+
+			var methods = {
+				"-": function(a, b) {
+					return a - b;
+				},
+				"+": function(a, b) {
+					return a + b;
+				}
+			};
+
+			this.calculate = function(str) {
+
+				var split = str.split(' '),
+				a = +split[0],
+				op = split[1],
+				b = +split[2]
+
+				if (!methods[op] || isNaN(a) || isNaN(b)) {
+					return NaN;
+				}
+
+				return methods[op](a, b);
+			}
+
+			this.addMethod = function(name, func) {
+				methods[name] = func;
+			};
+		}
+		*/
+	</script>
+
+</body>
+</html>

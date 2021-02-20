@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+</head>
+<body>
+
+	<script>
+		// Случайный порядок в массиве
+		'use strict'
+		var arr = [1, 2, 3, 4, 5];
+
+		// Моё решение
+		arr.sort(randomOrder);
+
+		alert( arr ); // элементы в случайном порядке, например [3,5,1,2,4]
+
+		function randomOrder(a, b)  {
+			return randomInteger(-1, 1);
+		}
+
+		function randomInteger(min, max)  {
+			return min + Math.floor(Math.random() * (max + 1 - min));
+		}
+		
+		/*
+		// Решение из учебника
+		function compareRandom(a, b) {
+			return Math.random() - 0.5;
+		}
+
+		arr.sort(compareRandom);
+
+		alert( arr );
+		*/
+	</script>
+
+</body>
+</html>

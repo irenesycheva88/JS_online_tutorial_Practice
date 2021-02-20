@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Добавить get/set-свойства
+
+		'use strict';
+		
+		// Моё решение (переделанное, т.к. сначала я сделала неправильно, не так как в учебнике,
+		// так как не так поняла задание, да и вообще не поняла из темы, что можно добавлять
+		// свойства прямо в функцию-конструктор)
+		// Также отличается от решения в учебнике деталями реализации get-ов и set-ов (у меня больше строк)
+		function User(fullName) {
+			this.fullName = fullName;
+
+			Object.defineProperties(this, {
+				firstName: {
+					get: function() {
+						var split = this.fullName.split(' ');
+						return split[0];
+					},
+
+					set: function(firstname) {
+						var split = this.fullName.split(' ');
+						split[0] = firstname;
+						this.fullName = split.join(' ');
+					}
+					
+				},
+
+				lastName: {
+					get: function() {
+						var split = this.fullName.split(' ');
+						return split[1];
+					},
+
+					set: function(lastname) {
+						var split = this.fullName.split(' ');
+						split[1] = lastname;
+						this.fullName = split.join(' ');
+					}
+					
+				}
+				
+			});
+		}
+		
+		/*
+		// Решение из учебника
+		function User(fullName) {
+			this.fullName = fullName;
+
+			Object.defineProperties(this, {
+
+				firstName: {
+
+					get: function() {
+						return this.fullName.split(' ')[0];
+					},
+
+					set: function(newFirstName) {
+						this.fullName = newFirstName + ' ' + this.lastName;
+					}
+
+				},
+
+				lastName: {
+
+					get: function() {
+						return this.fullName.split(' ')[1];
+					},
+
+					set: function(newLastName) {
+						this.fullName = this.firstName + ' ' + newLastName;
+					}
+
+				}
+
+			});
+		}
+		*/
+
+		var vasya = new User("Василий Попкин");
+
+		// чтение firstName/lastName
+		alert( vasya.firstName ); // Василий
+		alert( vasya.lastName ); // Попкин
+
+		// запись в lastName
+		vasya.lastName = 'Сидоров';
+
+		alert( vasya.fullName ); // Василий Сидоров
+
+		// запись в firstName
+		vasya.firstName = 'Михаил';
+
+		alert( vasya.fullName ); // Василий Сидоров
+
+		var ira = new User("Ирина Сычева");
+
+		// чтение firstName/lastName
+		alert( ira.firstName );
+		alert( ira.lastName );
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		// Алгоритм для поиска
+
+		'use strict';
+		var head = {
+			glasses: 1
+		};
+
+		var table = {
+			pen: 3
+		};
+		table.__proto__ = head;
+
+		var bed = {
+			sheet: 1,
+			pillow: 2
+		};
+		bed.__proto__ = table;
+
+		var pockets = {
+			money: 2000
+		};
+		pockets. __proto__ = bed;
+
+		alert( pockets.pen ); // 3
+		alert( bed.glasses ); // 1
+		alert( table.money ); // undefined
+
+		function bench(obj) {
+			var date = new Date();
+			for (var i = 0; i < 1000; i++)
+				obj.glasses;
+			return new Date() - date;
+		}
+
+		// bench для каждого теста запустим много раз, чередуя
+		var timePockets = 0,
+		timeHead = 0;
+		for (var i = 0; i < 1000; i++) {
+			timePockets += bench(pockets);
+			timeHead += bench(head);
+		}
+
+		alert( 'Время timePockets: ' + timePockets + 'мс' + '\n' + 'Время timeHead: ' + timeHead + 'мс' );
+	</script>
+</body>
+
+</html>

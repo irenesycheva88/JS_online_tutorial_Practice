@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.cx/test/libs.js"></script>
+  <script src="test.js"></script>
+</head>
+<body>
+
+  <script>
+	// Фильтрация массива "на месте"
+	'use strict'
+	function filterRangeInPlace(arr, a, b)  {
+		for(var i = 0; i < arr.length; i++)  {
+			if( arr[i] < a || arr[i] > b )  {		
+				arr.splice(i, 1);					// или в одну строку arr.splice(i--, 1); - подсказка из учебника
+				i--;
+			}
+		}
+	}
+	
+	describe("filterRangeInPlace", function() {
+
+		it("меняет массив, оставляя только значения из диапазона", function() {
+			var arr = [5, 3, 8, 1];
+			filterRangeInPlace(arr, 1, 4);
+			assert.deepEqual(arr, [3, 1]);
+		});
+
+	});
+  </script>
+
+</body>
+</html>
+

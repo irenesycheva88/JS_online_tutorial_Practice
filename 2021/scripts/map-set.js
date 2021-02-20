@@ -2,6 +2,7 @@
 
 
 // let john = { name: "John" };
+// console.log(john);
 
 // let obj = {}; // попробуем использовать Object
 // obj[john] = 123; // возьмём объект john как ключ

@@ -60,3 +60,53 @@
 // // Метод Array.from() создаёт новый экземпляр Array из массивоподобного или итерируемого объекта,
 // // например из Set
 // console.log(Array.from(new Set(["апельсин", "яблоко", "банан"]))); // ["апельсин", "яблоко", "банан"]
+
+// let arr1 = [1, 2, 3];
+// let arr2 = [1, 3, 5];
+// let arr3 = arr1 + arr2; 
+// console.log(arr3);  // херня, возвращает строку '1,2,31,3,5'
+
+// // А что сможет lodash???
+// let arr4 = _.sum(arr1, arr2); 
+// console.log(arr4); // 6!!! Вот это ответ!!!
+
+// // А, ну я туплю
+// let arr5 = new Array(...arr1, ...arr2); 
+// // // Без new тоже сработало:
+// // let arr5 = Array(...arr1, ...arr2); 
+// console.log(arr5); // [1, 2, 3, 1, 3, 5]
+
+// // Отсортируем
+// // на самом деле метод sort меняет arr5 на месте, нет смысла в новой переменной sortedArr5
+// let sortedArr5 = arr5.sort((a, b) => a - b); 
+// console.log(sortedArr5); // [1, 1, 2, 3, 3, 5]
+ 
+// console.log(arr5[5 / 2]);  // undefined, т.к. такого элемента нет. Логично
+// console.log(arr5[6 / 2]); // 3 - т.к. arr5 уже отсортирован на месте
+// console.log(6 / 2);
+
+// // Все действия в одну строку
+// // let nums = (new Array(...arr1, ...arr2)).sort((a, b) => a - b);
+// let nums = (Array(...arr1, ...arr2)).sort((a, b) => a - b);   // или без опратора new. ??? Непонятно, почему
+//                                     // JS без разницы использую ли я new или нет при создании массива???
+// console.log(nums);
+
+// var findMedianSortedArrays = function(nums1, nums2) {
+//     let nums = []
+//     nums.push(...nums1, ...nums2);
+//     nums.sort((a, b) => a - b);
+//     return (nums.length % 2 === 1) ? nums[(nums.length - 1) / 2] : (nums[(nums.length) / 2 - 1] + nums[(nums.length) / 2]) / 2;
+// };
+
+// console.log(findMedianSortedArrays([], [1]));
+
+// console.log(new Array(...[], ...[1])); // [empty], length == 1, т.к. было передано только одно число
+// console.log(new Array(...[1], ...[])); // [empty], length == 1, т.к. было передано только одно число
+// console.log(new Array(...[])); // []
+// console.log([]);
+// console.log(...[]);  // вообще эта строчка не выводится
+// console.log();      // и эта тоже не выводится
+// console.log(null);
+// // let a = (...[]);  // Uncaught SyntaxError: Unexpected token '...'
+// // console.log(a);
+
